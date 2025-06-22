@@ -53,8 +53,8 @@ class TaskManager:
             print(task)
 
     def clearTasks(self):
-        for task in self.tasks:
-            self.tasks.pop()
+        self.tasks.clear()
+        self.save()
 
     def findTasks(self, attempt):
         possible = []
