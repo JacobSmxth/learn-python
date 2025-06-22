@@ -1,6 +1,7 @@
 # This is my test file to test out new things i'm learning and to show my thought process
 #
 
+import json
 
 # First Object
 #
@@ -37,7 +38,31 @@ class Person:
     def greet(self):
         print(f"Hello there {self.name!s}!")
 
-    
+    def to_diction(self):
+        return {
+            "name": self.name,
+            "age": self.age
+        }
+def view():
+    for p in Person.all_people:
+        print(p)
+
+def save():
+    data = []
+    for person in Person.all_people:
+        data.append(person.to_diction())
+    with open("test.json", "w") as f:
+        json.dump({"data": data}, f)
+
+def load():
+    with open("test.json", "r") as f:
+        data = json.load(f)
+        for d in data["data"]:
+            # print(d)
+            person = Person(d["name"], d["age"])
+
+
+           
 
 
 p1 = Person("Jacob", 19)
@@ -57,14 +82,6 @@ try:
 except:
     print("No Object Anymore")
 
+load()
 
-print("Making new objects to test")
-a = Person("John", 11)
-b = Person("Michael", 12)
-c = Person("Hannah", 13)
-d = Person("Mark", 10)
-
-print(Person.all_people)
-
-a.greet()
-
+view()
