@@ -34,19 +34,21 @@ class TaskManager:
                     "name": task.name,
                     "index": index
                 })
-        if (len(possible) == 0):
-            return None
-        elif (len(possible) == 1):
-            return possible[0]
-        else:
-            return possible
+        return possible # Always return list 
+       
 
 
     def deleteTask(self, index):
-        del self.tasks[index]
+        if 0 <= index and index < len(self.tasks):
+            del self.tasks[index]
+        else:
+            print("Invalid Index")
 
     def toggleCompletion(self, index):
-        self.tasks[index].completed = not self.tasks[index].completed
+        if 0 <= index and index < len(self.tasks):
+            self.tasks[index].completed = not self.tasks[index].completed
+        else:
+            print("Invalid Index")
 
 
 
@@ -62,7 +64,7 @@ manager.addTask("Test", "pls")
 manager.viewTasks()
 
 
-manager.deleteTask(manager.findTasks("Dog")["index"]) #test case. need to check what is return by the findTasks
+manager.deleteTask(manager.findTasks("Dog")["index"]) 
 manager.toggleCompletion(manager.findTasks("Walk")["index"])
 
 print("----------------")
